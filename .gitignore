@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project-specific
+progress.json
+progress.txt
+listings.jsonl
+listings_*.jsonl
+file_manifest.json
+split_output/
+output/
+test_output/
+
+# Credentials (keep user_config.py in .gitignore too if it contains real credentials)
+user_config.py

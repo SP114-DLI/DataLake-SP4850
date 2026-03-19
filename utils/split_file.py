@@ -1,6 +1,20 @@
+"""Utility to split large JSONL files into smaller chunks by size."""
+
 from pathlib import Path
 
-def split_jsonl_by_size_binary(input_file, output_dir, chunk_size_mb=512):
+
+def split_jsonl_by_size(input_file, output_dir, chunk_size_mb=512):
+    """
+    Split a large JSONL file into multiple smaller files by size.
+    
+    Each output file will be approximately chunk_size_mb in size.
+    Files are named as: <input_stem>_part_001.jsonl, _part_002.jsonl, etc.
+    
+    Args:
+        input_file: Path to input JSONL file
+        output_dir: Directory to write output files
+        chunk_size_mb: Target size per chunk in MB (default 512)
+    """
     input_path = Path(input_file)
     output_path = Path(output_dir)
     output_path.mkdir(parents=True, exist_ok=True)
@@ -35,5 +49,7 @@ def split_jsonl_by_size_binary(input_file, output_dir, chunk_size_mb=512):
 
     print(f"Done. Created {part_num} file(s) in {output_path}")
 
-# Example usage
-split_jsonl_by_size_binary("listings.jsonl", "split_output", chunk_size_mb=512)
+
+if __name__ == "__main__":
+    # Example usage: Split listings.jsonl into 512MB chunks
+    split_jsonl_by_size("../listings.jsonl", "split_output", chunk_size_mb=512)
