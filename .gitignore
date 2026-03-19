@@ -16,15 +16,18 @@ pip-delete-this-directory.txt
 *.swp
 *.swo
 
-# Project-specific
+# Project-specific output
+data/
+output/
+split_output/
+test_output/
+
+# Generated files
 progress.json
 progress.txt
+file_manifest.json
 listings.jsonl
 listings_*.jsonl
-file_manifest.json
-split_output/
-output/
-test_output/
 
 # Credentials (keep user_config.py in .gitignore too if it contains real credentials)
 user_config.py

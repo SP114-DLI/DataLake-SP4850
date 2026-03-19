@@ -124,15 +124,23 @@ def scrape_all(zip_file, output_dir=".", output_base="listings", progress_file="
 
 
 if __name__ == "__main__":
-    scrape_all(
-        zip_file="zip_codes.txt",
-        output_dir=".",
-        output_base="listings",
-        progress_file="progress.json",
-        year_start=1982,
-        year_end=2026,
-        vehicle_condition="USED",
-        batch_year_end=2010,
-        radius=25,
-        delay=0,
-    )
+    try:
+        scrape_all(
+            zip_file="zip_codes.txt",
+            output_dir="data",
+            output_base="listings",
+            progress_file="progress.json",
+            year_start=1982,
+            year_end=2026,
+            vehicle_condition="USED",
+            batch_year_end=2010,
+            radius=25,
+            delay=0,
+        )
+    except KeyboardInterrupt:
+        print("\n\n⏹️  Scraping interrupted by user (Ctrl+C)")
+        close_storage_manager()
+        print("✓ Manifest saved and files finalized")
+    finally:
+        # Ensure cleanup happens even on other exceptions
+        close_storage_manager()

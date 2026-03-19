@@ -43,6 +43,10 @@ class FileStorageManager:
         self.manifest = self._load_manifest()
         self.current_file_hash = hashlib.md5()
         
+        # Periodic manifest saving (every N rows)
+        self.manifest_save_interval = 10
+        self.rows_since_manifest_save = 0
+        
         # Recover state from manifest if files already exist
         self._recover_state()
     
@@ -158,6 +162,13 @@ class FileStorageManager:
         self.current_file_size += line_size
         self.current_file_row_count += 1
         self.current_file_hash.update(line)
+        self.rows_since_manifest_save += 1
+        
+        # Periodically save manifest (every N rows)
+        if self.rows_since_manifest_save >= self.manifest_save_interval:
+            self.flush()
+            self._save_manifest()
+            self.rows_since_manifest_save = 0
         
         return True
     
