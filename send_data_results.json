@@ -1,0 +1,96 @@
+{
+  "timestamp": "2026-03-19T19:14:31.769235",
+  "endpoint": "sp114api.loclx.io",
+  "bucket": "datalake",
+  "total_files": 7,
+  "successful_uploads": 7,
+  "failed_uploads": 0,
+  "files": [
+    {
+      "filename": "listings_part_001.jsonl",
+      "success": true,
+      "size_mb": 511.9988317489624,
+      "metadata": {
+        "part_number": "1",
+        "row_count": "50220",
+        "md5_hash": "2826c69fb5cd56b786cf5330a9d396e3",
+        "created_at": "2026-03-19T16:28:35.373174",
+        "size_bytes": "536869687"
+      }
+    },
+    {
+      "filename": "listings_part_002.jsonl",
+      "success": true,
+      "size_mb": 511.9947900772095,
+      "metadata": {
+        "part_number": "2",
+        "row_count": "49196",
+        "md5_hash": "5c6e0fbeb0f9cdba3fd4cc608279f21e",
+        "created_at": "2026-03-19T16:43:18.539296",
+        "size_bytes": "536865449"
+      }
+    },
+    {
+      "filename": "listings_part_003.jsonl",
+      "success": true,
+      "size_mb": 511.99128437042236,
+      "metadata": {
+        "part_number": "3",
+        "row_count": "50276",
+        "md5_hash": "87dec6181706855dbf8b59d23a5b3152",
+        "created_at": "2026-03-19T17:15:03.795322",
+        "size_bytes": "536861773"
+      }
+    },
+    {
+      "filename": "listings_part_004.jsonl",
+      "success": true,
+      "size_mb": 511.99720668792725,
+      "metadata": {
+        "part_number": "4",
+        "row_count": "49254",
+        "md5_hash": "e608113b8c7f8841497a66bafa71a8f6",
+        "created_at": "2026-03-19T17:47:12.807052",
+        "size_bytes": "536867983"
+      }
+    },
+    {
+      "filename": "listings_part_005.jsonl",
+      "success": true,
+      "size_mb": 511.9979085922241,
+      "metadata": {
+        "part_number": "5",
+        "row_count": "49796",
+        "md5_hash": "345d7309fbb30e1ce144a320013321ae",
+        "created_at": "2026-03-19T18:21:46.206397",
+        "size_bytes": "536868719"
+      }
+    },
+    {
+      "filename": "listings_part_006.jsonl",
+      "success": true,
+      "size_mb": 511.989896774292,
+      "metadata": {
+        "part_number": "6",
+        "row_count": "49233",
+        "md5_hash": "ff6f6bc807ff4986416f9d8c058531ec",
+        "created_at": "2026-03-19T18:46:51.484367",
+        "size_bytes": "536860318"
+      }
+    },
+    {
+      "filename": "listings_part_007.jsonl",
+      "success": true,
+      "size_mb": 196.09113788604736,
+      "metadata": {
+        "part_number": "7",
+        "row_count": "18513",
+        "md5_hash": "689fb8310dffa1d8c6b7e8ca1d0698ea",
+        "created_at": "2026-03-19T18:55:14.369151",
+        "size_bytes": "205616461"
+      }
+    }
+  ],
+  "manifest_uploaded": true,
+  "success": true
+}
