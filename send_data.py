@@ -40,6 +40,30 @@ def setup_logging(log_level: str = "INFO") -> logging.Logger:
 logger = setup_logging()
 
 
+def get_bucket_objects(client: Minio, bucket_name: str) -> Dict[str, Dict]:
+    """
+    Get a dictionary of all objects in the bucket.
+    
+    Args:
+        client: MinIO client instance
+        bucket_name: Name of the bucket
+    
+    Returns:
+        Dictionary mapping filename -> {size, etag}
+    """
+    bucket_objects = {}
+    try:
+        for obj in client.list_objects(bucket_name):
+            bucket_objects[obj.object_name] = {
+                'size': obj.size,
+                'etag': obj.etag
+            }
+    except Exception as e:
+        logger.warning(f"Failed to list bucket objects: {e}")
+    
+    return bucket_objects
+
+
 def send_all_data(
     endpoint: str = "sp114api.loclx.io",
     access_key: str = "SP114",
@@ -106,6 +130,11 @@ def send_all_data(
         logger.error(f"Failed to load manifest: {e}")
         return {"success": False, "error": f"Failed to load manifest: {e}"}
     
+    # Get existing objects in bucket
+    logger.info(f"Checking existing files in bucket '{bucket_name}'...")
+    bucket_objects = get_bucket_objects(client, bucket_name)
+    logger.info(f"Found {len(bucket_objects)} existing files in bucket")
+    
     # Upload data files
     stats = {
         "timestamp": datetime.now().isoformat(),
@@ -113,6 +142,7 @@ def send_all_data(
         "bucket": bucket_name,
         "total_files": 0,
         "successful_uploads": 0,
+        "skipped_uploads": 0,
         "failed_uploads": 0,
         "files": [],
         "manifest_uploaded": False
@@ -136,6 +166,33 @@ def send_all_data(
                 "error": "File not found"
             })
             continue
+        
+        # Check if file already exists in bucket with same size
+        if filename in bucket_objects:
+            local_size = file_path.stat().st_size
+            remote_size = bucket_objects[filename].get('size', -1)
+            local_md5 = file_info.get("md5_hash", "")
+            
+            if local_size == remote_size and local_md5:
+                logger.info(f"⊘ Skipping (already exists): {filename} ({local_size / (1024 ** 2):.2f} MB)")
+                stats["skipped_uploads"] += 1
+                stats["files"].append({
+                    "filename": filename,
+                    "success": True,
+                    "skipped": True,
+                    "reason": "File already exists with matching size"
+                })
+                continue
+            elif local_size == remote_size:
+                logger.info(f"⊘ Skipping (already exists, size match): {filename} ({local_size / (1024 ** 2):.2f} MB)")
+                stats["skipped_uploads"] += 1
+                stats["files"].append({
+                    "filename": filename,
+                    "success": True,
+                    "skipped": True,
+                    "reason": "File already exists with matching size"
+                })
+                continue
         
         try:
             file_size_mb = file_path.stat().st_size / (1024 ** 2)
@@ -205,6 +262,7 @@ def send_all_data(
     logger.info(f"Upload Summary:")
     logger.info(f"  Total files: {stats['total_files']}")
     logger.info(f"  Successful: {stats['successful_uploads']}")
+    logger.info(f"  Skipped: {stats['skipped_uploads']}")
     logger.info(f"  Failed: {stats['failed_uploads']}")
     logger.info(f"  Manifest uploaded: {stats['manifest_uploaded']}")
     logger.info(f"  Overall status: {'SUCCESS' if stats['success'] else 'FAILED'}")
@@ -235,8 +293,8 @@ def main():
     )
     parser.add_argument(
         "--bucket",
-        default="datalake",
-        help="Bucket name (default: datalake)"
+        default="lakeraw",
+        help="Bucket name (default: lakeraw)"
     )
     parser.add_argument(
         "--manifest",
