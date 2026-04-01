@@ -16,7 +16,7 @@ pip-delete-this-directory.txt
 *.swp
 *.swo
 
-# Project-specific output
+# Data and output
 data/
 output/
 split_output/
@@ -28,6 +28,7 @@ progress.txt
 file_manifest.json
 listings.jsonl
 listings_*.jsonl
+send_data_results.json
 
-# Credentials (keep user_config.py in .gitignore too if it contains real credentials)
+# Credentials (user_config.py contains session cookies and headers)
 user_config.py

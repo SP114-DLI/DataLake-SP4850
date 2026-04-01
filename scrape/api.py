@@ -1,26 +1,20 @@
-"""Core scraping logic for vehicle data."""
+"""Carfax API client with retry logic and pagination."""
+
+import time
 
 import requests
-import time
-from constants import BASE_URL, MAX_RETRIES, INITIAL_WAIT, API_HEADERS, API_COOKIES
+
+from scrape.config import BASE_URL, MAX_RETRIES, INITIAL_WAIT, API_HEADERS, API_COOKIES
 
 
-def search_vehicles(zip_code, year_min=None, year_max=None, vehicle_condition="USED", radius=25, rows=25, page=1):
+def search_vehicles(zip_code, year_min=None, year_max=None, vehicle_condition="USED",
+                    radius=25, rows=25, page=1):
     """
-    Search for vehicles in a given zip code with optional filters.
-    
-    Args:
-        zip_code: ZIP code to search
-        year_min: Minimum model year
-        year_max: Maximum model year
-        vehicle_condition: "USED" or "NEW"
-        radius: Search radius in miles
-        rows: Number of results per page
-        page: Page number (1-indexed)
-    
+    Search for vehicles via the Carfax API with exponential backoff retry.
+
     Returns:
         dict: JSON response from API
-    
+
     Raises:
         requests.HTTPError: If request fails after all retries
     """
@@ -33,43 +27,31 @@ def search_vehicles(zip_code, year_min=None, year_max=None, vehicle_condition="U
         "dynamicRadius": "false",
         "page": page,
     }
-    
     if year_min is not None:
         params["yearMin"] = year_min
     if year_max is not None:
         params["yearMax"] = year_max
-    
+
     wait = INITIAL_WAIT
     for attempt in range(1, MAX_RETRIES + 1):
         response = requests.get(BASE_URL, headers=API_HEADERS, cookies=API_COOKIES, params=params)
-
         if response.status_code == 200:
             return response.json()
 
-        print(f"    ⚠ HTTP {response.status_code} (attempt {attempt}/{MAX_RETRIES}). "
-              f"Waiting {wait}s before retry...")
+        print(f"    HTTP {response.status_code} (attempt {attempt}/{MAX_RETRIES}). Waiting {wait}s...")
         time.sleep(wait)
-        wait *= 2  # exponential backoff: 5, 10, 20, 40, 80, 160...
+        wait *= 2
 
-    # Final attempt failed — raise so the caller can handle it
     response.raise_for_status()
 
 
-def fetch_all_listings_for_zip(zip_code, year_min, year_max, vehicle_condition, radius=25, rows=25, delay=1.0):
+def fetch_all_listings_for_zip(zip_code, year_min, year_max, vehicle_condition,
+                               radius=25, rows=25, delay=1.0):
     """
-    Fetch all raw listing objects across all pages for a given zip code.
-    
-    Args:
-        zip_code: ZIP code to search
-        year_min: Minimum model year
-        year_max: Maximum model year
-        vehicle_condition: "USED" or "NEW"
-        radius: Search radius in miles
-        rows: Results per page
-        delay: Delay between page requests in seconds
-    
+    Fetch all listing objects across all pages for a zip/year combination.
+
     Returns:
-        list: All listing objects for the zip/year combination
+        list: All listing dicts for the given zip/year range
     """
     all_listings = []
 
@@ -78,9 +60,7 @@ def fetch_all_listings_for_zip(zip_code, year_min, year_max, vehicle_condition, 
     total_count = data.get("totalListingCount", 0)
 
     print(f"  Zip {zip_code}: {total_count} total listings across {total_pages} pages")
-
-    listings = data.get("listings", [])
-    all_listings.extend(listings)
+    all_listings.extend(data.get("listings", []))
 
     for page in range(2, total_pages + 1):
         time.sleep(delay)
