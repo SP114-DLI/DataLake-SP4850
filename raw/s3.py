@@ -1,6 +1,7 @@
 """S3-compatible object storage operations via boto3."""
 
 import boto3
+from botocore.config import Config
 from botocore.exceptions import ClientError
 
 from config import ENDPOINT, ACCESS_KEY, SECRET_KEY, REGION, USE_HTTPS
@@ -21,6 +22,7 @@ def get_client(endpoint=None, access_key=None, secret_key=None, region=None, use
         aws_access_key_id=access_key,
         aws_secret_access_key=secret_key,
         region_name=region,
+        config=Config(s3={"addressing_style": "path"}),
     )
 
 
