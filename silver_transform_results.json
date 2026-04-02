@@ -1,0 +1,199 @@
+{
+  "success": true,
+  "files_processed": 27,
+  "files_skipped": 0,
+  "files_failed": 0,
+  "total_records": 1293724,
+  "total_after_dedup": 469400,
+  "files": [
+    {
+      "source": "listings_part_001.jsonl",
+      "dest": "listings_part_001.parquet",
+      "raw_records": 50220,
+      "deduped_records": 19685,
+      "size_mb": 31.17
+    },
+    {
+      "source": "listings_part_002.jsonl",
+      "dest": "listings_part_002.parquet",
+      "raw_records": 49196,
+      "deduped_records": 23605,
+      "size_mb": 37.9
+    },
+    {
+      "source": "listings_part_003.jsonl",
+      "dest": "listings_part_003.parquet",
+      "raw_records": 50276,
+      "deduped_records": 19837,
+      "size_mb": 31.35
+    },
+    {
+      "source": "listings_part_004.jsonl",
+      "dest": "listings_part_004.parquet",
+      "raw_records": 49254,
+      "deduped_records": 20404,
+      "size_mb": 32.37
+    },
+    {
+      "source": "listings_part_005.jsonl",
+      "dest": "listings_part_005.parquet",
+      "raw_records": 49796,
+      "deduped_records": 16418,
+      "size_mb": 26.02
+    },
+    {
+      "source": "listings_part_006.jsonl",
+      "dest": "listings_part_006.parquet",
+      "raw_records": 49233,
+      "deduped_records": 19586,
+      "size_mb": 31.38
+    },
+    {
+      "source": "listings_part_007.jsonl",
+      "dest": "listings_part_007.parquet",
+      "raw_records": 49616,
+      "deduped_records": 15927,
+      "size_mb": 25.33
+    },
+    {
+      "source": "listings_part_008.jsonl",
+      "dest": "listings_part_008.parquet",
+      "raw_records": 48964,
+      "deduped_records": 17114,
+      "size_mb": 27.3
+    },
+    {
+      "source": "listings_part_009.jsonl",
+      "dest": "listings_part_009.parquet",
+      "raw_records": 49930,
+      "deduped_records": 16293,
+      "size_mb": 25.76
+    },
+    {
+      "source": "listings_part_010.jsonl",
+      "dest": "listings_part_010.parquet",
+      "raw_records": 49597,
+      "deduped_records": 19007,
+      "size_mb": 30.09
+    },
+    {
+      "source": "listings_part_011.jsonl",
+      "dest": "listings_part_011.parquet",
+      "raw_records": 49498,
+      "deduped_records": 19513,
+      "size_mb": 31.01
+    },
+    {
+      "source": "listings_part_012.jsonl",
+      "dest": "listings_part_012.parquet",
+      "raw_records": 49575,
+      "deduped_records": 19709,
+      "size_mb": 31.6
+    },
+    {
+      "source": "listings_part_013.jsonl",
+      "dest": "listings_part_013.parquet",
+      "raw_records": 49807,
+      "deduped_records": 17931,
+      "size_mb": 28.51
+    },
+    {
+      "source": "listings_part_014.jsonl",
+      "dest": "listings_part_014.parquet",
+      "raw_records": 49874,
+      "deduped_records": 20869,
+      "size_mb": 33.35
+    },
+    {
+      "source": "listings_part_015.jsonl",
+      "dest": "listings_part_015.parquet",
+      "raw_records": 49409,
+      "deduped_records": 19082,
+      "size_mb": 30.03
+    },
+    {
+      "source": "listings_part_016.jsonl",
+      "dest": "listings_part_016.parquet",
+      "raw_records": 48943,
+      "deduped_records": 17375,
+      "size_mb": 28.1
+    },
+    {
+      "source": "listings_part_017.jsonl",
+      "dest": "listings_part_017.parquet",
+      "raw_records": 49320,
+      "deduped_records": 17988,
+      "size_mb": 28.84
+    },
+    {
+      "source": "listings_part_018.jsonl",
+      "dest": "listings_part_018.parquet",
+      "raw_records": 48778,
+      "deduped_records": 14429,
+      "size_mb": 23.32
+    },
+    {
+      "source": "listings_part_019.jsonl",
+      "dest": "listings_part_019.parquet",
+      "raw_records": 49242,
+      "deduped_records": 18179,
+      "size_mb": 29.37
+    },
+    {
+      "source": "listings_part_020.jsonl",
+      "dest": "listings_part_020.parquet",
+      "raw_records": 49125,
+      "deduped_records": 17273,
+      "size_mb": 27.94
+    },
+    {
+      "source": "listings_part_021.jsonl",
+      "dest": "listings_part_021.parquet",
+      "raw_records": 49377,
+      "deduped_records": 18189,
+      "size_mb": 29.17
+    },
+    {
+      "source": "listings_part_022.jsonl",
+      "dest": "listings_part_022.parquet",
+      "raw_records": 48339,
+      "deduped_records": 9794,
+      "size_mb": 16.25
+    },
+    {
+      "source": "listings_part_023.jsonl",
+      "dest": "listings_part_023.parquet",
+      "raw_records": 48583,
+      "deduped_records": 13482,
+      "size_mb": 21.76
+    },
+    {
+      "source": "listings_part_024.jsonl",
+      "dest": "listings_part_024.parquet",
+      "raw_records": 49022,
+      "deduped_records": 15280,
+      "size_mb": 24.48
+    },
+    {
+      "source": "listings_part_025.jsonl",
+      "dest": "listings_part_025.parquet",
+      "raw_records": 49054,
+      "deduped_records": 17126,
+      "size_mb": 27.33
+    },
+    {
+      "source": "listings_part_026.jsonl",
+      "dest": "listings_part_026.parquet",
+      "raw_records": 49827,
+      "deduped_records": 16128,
+      "size_mb": 25.63
+    },
+    {
+      "source": "listings_part_027.jsonl",
+      "dest": "listings_part_027.parquet",
+      "raw_records": 9869,
+      "deduped_records": 9177,
+      "size_mb": 15.71
+    }
+  ]
+}

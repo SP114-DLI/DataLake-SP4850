@@ -4,7 +4,7 @@ import boto3
 from botocore.config import Config
 from botocore.exceptions import ClientError
 
-from config import ENDPOINT, ACCESS_KEY, SECRET_KEY, REGION, USE_HTTPS
+from raw.config import ENDPOINT, ACCESS_KEY, SECRET_KEY, REGION, USE_HTTPS
 
 
 def get_client(endpoint=None, access_key=None, secret_key=None, region=None, use_https=None):
@@ -227,7 +227,6 @@ def setup_lake_buckets(client=None):
 
 
 if __name__ == "__main__":
-    delete_all_versions("lakebronze")
-    delete_bucket("lakebronze", force=True)
+    delete_bucket("datalake", force=True)
     list_buckets()
 

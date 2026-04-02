@@ -1,8 +1,11 @@
 """Silver layer - data cleaning, deduplication, and transformation.
 
-This layer will contain code to:
-- Deduplicate raw listings across files
-- Normalize and validate fields (prices, mileage, dates)
-- Standardize categorical values (make, model, trim)
-- Handle missing data and outliers
+This layer contains code to:
+- Download raw JSONL listings from the lakeraw S3 bucket
+- Flatten nested JSON (dealer, monthlyPaymentEstimate) into tabular columns
+- Deduplicate listings by VIN
+- Convert to Parquet format and upload to the lakesilver S3 bucket
+
+Usage:
+    python -m silver.transform
 """
