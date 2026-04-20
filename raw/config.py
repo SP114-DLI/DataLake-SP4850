@@ -1,11 +1,13 @@
 """Configuration for raw data storage and object storage connections."""
 
-# MinIO / S3 connection defaults
-ENDPOINT = "sp114api.loclx.io"
-ACCESS_KEY = "SP114"
-SECRET_KEY = "DataLakeImplementation"
-REGION = "us-east-1"
-USE_HTTPS = False
+import os
+
+# MinIO / S3 connection. Set via environment variables; no defaults for secrets.
+ENDPOINT = os.getenv("S3_ENDPOINT", "")
+ACCESS_KEY = os.getenv("S3_ACCESS_KEY", "")
+SECRET_KEY = os.getenv("S3_SECRET_KEY", "")
+REGION = os.getenv("S3_REGION", "us-east-1")
+USE_HTTPS = os.getenv("S3_USE_HTTPS", "false").lower() == "true"
 
 # Data lake bucket names (lakeraw serves as the bronze layer)
 BUCKET_RAW = "lakeraw"

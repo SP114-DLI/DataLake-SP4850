@@ -31,12 +31,7 @@ except ImportError:
 # ---------------------------------------------------------------------------
 # Constants
 # ---------------------------------------------------------------------------
-# MinIO / S3
-ENDPOINT = "sp114api.loclx.io"
-ACCESS_KEY = "SP114"
-SECRET_KEY = "DataLakeImplementation"
-USE_HTTPS = False
-BUCKET_RAW = "lakeraw"
+from raw.config import ENDPOINT, ACCESS_KEY, SECRET_KEY, USE_HTTPS, BUCKET_RAW
 
 # Carfax API
 BASE_URL = "https://helix.carfax.com/search/v2/vehicles"

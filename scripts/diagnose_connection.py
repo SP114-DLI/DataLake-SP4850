@@ -7,10 +7,7 @@ import urllib3
 # Suppress InsecureRequestWarning for http tests
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-ENDPOINT = "sp114api.loclx.io"
-ACCESS_KEY = "SP114"
-SECRET_KEY = "DataLakeImplementation"
-BUCKET = "lakeraw"
+from raw.config import ENDPOINT, ACCESS_KEY, SECRET_KEY, BUCKET_RAW as BUCKET
 
 DIVIDER = "-" * 60
 
