@@ -1,11 +1,6 @@
-"""Silver layer - data cleaning, deduplication, and transformation.
+"""Silver layer - schema-enforced, deduplicated, quality-checked data.
 
-This layer contains code to:
-- Download raw JSONL listings from the lakeraw S3 bucket
-- Flatten nested JSON (dealer, monthlyPaymentEstimate) into tabular columns
-- Deduplicate listings by VIN
-- Convert to Parquet format and upload to the lakesilver S3 bucket
-
-Usage:
-    python -m silver.transform
+Modules:
+    transform       Raw JSONL -> clean Parquet (with quarantine)
+    quality_report  Null/missing statistics across silver data
 """

@@ -16,19 +16,36 @@ pip-delete-this-directory.txt
 *.swp
 *.swo
 
-# Data and output
-data/
-output/
-split_output/
-test_output/
+# Raw scraped data (keep folder, ignore contents)
+data/*
+!data/.gitkeep
 
-# Generated files
+# Generated reports (keep folder, ignore contents)
+reports/*
+!reports/.gitkeep
+
+# Local parquet downloads / caches (keep folder, ignore contents)
+downloads/*
+!downloads/.gitkeep
+
+# Loose parquet/jsonl artifacts anywhere in the tree
+*.parquet
+listings.jsonl
+listings_*.jsonl
+
+# Legacy generated files (pre-reorg; safe to ignore if they reappear at root)
 progress.json
 progress.txt
 file_manifest.json
-listings.jsonl
-listings_*.jsonl
 send_data_results.json
+report.json
+silver_transform_results.json
+gold_transform_results.json
+
+# Legacy output dirs
+output/
+split_output/
+test_output/
 
 # Credentials (user_config.py contains session cookies and headers)
 user_config.py
