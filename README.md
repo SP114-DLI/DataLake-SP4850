@@ -100,3 +100,13 @@ Output files are automatically rotated at 512 MB:
 - `data/file_manifest.json` (metadata for all files)
 
 Progress is tracked in `progress.json` per ZIP/year combination, allowing interrupted runs to resume.
+
+
+## Object Store Setup
+1. Download minio.exe server binary from www.min.io
+
+2. Obtain a license from minio to run the server and create a local file directory to host the server
+
+3. Configure config file or environmental variables such as MINIO_LICENSE or MINIO_ADDRESS to customize server features and information
+
+4. Start the server from the command line with the appropriate flags and path to the server directory
